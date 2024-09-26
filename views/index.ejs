@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100 ">
+    <h1 class="text-2xl font-bold mb-4">Tính phương trình bậc 2: ax<sup>2</sup> – bx + c = 0</h1>
+    <form id="quadraticForm" class="bg-white p-6 rounded-lg shadow-md">
+        <div class="mb-4">
+            <label for="a" class="block text-gray-700 font-semibold">Nhập a</label>
+            <input type="number" id="a" name="a" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" required>
+        </div>
+        <div class="mb-4">
+            <label for="b" class="block text-gray-700 font-semibold">Nhập b</label>
+            <input type="number" id="b" name="b" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" required>
+        </div>
+        <div class="mb-4">
+            <label for="c" class="block text-gray-700 font-semibold">Nhập c</label>
+            <input type="number" id="c" name="c" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" required>
+        </div>
+
+        <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition">Giải phương trình</button>
+
+        <div class="mt-4">
+            <label for="result" class="block text-gray-700 font-semibold">Kết quả</label>
+            <textarea id="result" name="result" rows="3" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500" readonly></textarea>
+        </div>
+        
+        
+    </form>
+
+    <script>
+        document.getElementById('quadraticForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Ngăn form submit tự động
+
+            // Lấy giá trị của a, b, c từ input
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+            const c = parseFloat(document.getElementById('c').value);
+
+            const delta = b * b - 4 * a * c;
+            let result = '';
+
+            if (delta < 0) {
+                result = 'Phương trình vô nghiệm';
+            } else if (delta === 0) {
+                const x = -b / (2 * a);
+                result = `Phương trình có nghiệm kép:\n x = ${x}`;
+            } else {
+                const x1 = (-b + Math.sqrt(delta)) / (2 * a);
+                const x2 = (-b - Math.sqrt(delta)) / (2 * a);
+                result = `Phương trình có 2 nghiệm: x1 = ${x1}\nx2 = ${x2}`;
+            }
+
+            // Hiển thị kết quả ra ô input kết quả
+            document.getElementById('result').value = result;
+        });
+    </script>
+</body>
+</html>
